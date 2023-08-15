@@ -1,5 +1,8 @@
 package com.kleyber.SISGEO.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +25,12 @@ public class ServidorResource {
 	public ResponseEntity<ServidorDTO> findById(@PathVariable Integer id) {
 		Servidor objeto = this.service.findById(id);
 		return ResponseEntity.ok().body(new ServidorDTO(objeto));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<ServidorDTO>> findAll() {
+		List<Servidor> lista = service.findAll();
+		List<ServidorDTO> listaDTO = lista.stream().map(objeto -> new ServidorDTO(objeto)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listaDTO);
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kleyber.SISGEO.dominio.Servidor;
 import com.kleyber.SISGEO.repositorios.ServidorRepositorio;
+import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
 
 @Service
 public class ServidorService {
@@ -16,6 +17,6 @@ public class ServidorService {
 	
 	public Servidor findById(Integer id) {
 		Optional<Servidor> objeto = repositorio.findById(id);
-		return objeto.orElse(null);
+		return objeto.orElseThrow(() -> new ObjetonaoEncontradoException("Objeto não encontrado! id: " + id));
 	}
 }

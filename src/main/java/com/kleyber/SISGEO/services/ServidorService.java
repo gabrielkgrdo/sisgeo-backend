@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kleyber.SISGEO.dominio.Servidor;
+import com.kleyber.SISGEO.dominio.DTOs.ServidorDTO;
 import com.kleyber.SISGEO.repositorios.ServidorRepositorio;
 import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
 
@@ -24,4 +25,11 @@ public class ServidorService {
 	public List<Servidor> findAll() {
 		return repositorio.findAll();
 	}
+
+	public Servidor create(ServidorDTO objetoDTO) {
+		objetoDTO.setId(null);
+		Servidor newObj = new Servidor(objetoDTO);
+		return repositorio.save(newObj);
+	}
+
 }

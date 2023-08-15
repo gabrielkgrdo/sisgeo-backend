@@ -23,6 +23,7 @@ public class ServidorDTO {
 
 	public ServidorDTO() {
 		super();
+		addPerfil(Perfil.USUARIO);
 	}
 
 	public ServidorDTO(Servidor objeto) {

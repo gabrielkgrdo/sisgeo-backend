@@ -1,0 +1,38 @@
+package com.kleyber.SISGEO.dominio;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
+@Entity
+public class Servidor extends Pessoa{
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "servidor")
+	private List<Ocorrencias> ocorrencias = new ArrayList<>();
+
+	public Servidor() {
+		super();
+		addPerfil(Perfil.USUARIO);
+	}
+
+	public Servidor(Integer id, String nome, String cpf, String email, String senha) {
+		super(id, nome, cpf, email, senha);
+		addPerfil(Perfil.USUARIO);
+	}
+
+	public List<Ocorrencias> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<Ocorrencias> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
+	
+	
+}

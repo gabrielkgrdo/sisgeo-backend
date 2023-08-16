@@ -14,15 +14,17 @@ import com.kleyber.SISGEO.repositorios.ServidorRepositorio;
 import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
 import com.kleyber.SISGEO.services.exceptions.ViolacaoIntegridadeDadoException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class ServidorService {
 
 	@Autowired
 	private ServidorRepositorio repositorio;
-	
+
 	@Autowired
 	private PessoaRepositorio pessoaRepositorio;
-	
+
 	public Servidor findById(Integer id) {
 		Optional<Servidor> objeto = repositorio.findById(id);
 		return objeto.orElseThrow(() -> new ObjetonaoEncontradoException("Objeto não encontrado! id: " + id));
@@ -39,16 +41,23 @@ public class ServidorService {
 		return repositorio.save(newObj);
 	}
 
+	public Servidor update(Integer id, @Valid ServidorDTO objetoDto) {
+		objetoDto.setId(id);
+		Servidor objetoAntigo = findById(id);
+		validaPorCpfeEmail(objetoDto);
+		objetoAntigo = new Servidor(objetoDto);
+		return repositorio.save(objetoAntigo);
+	}
+
 	private void validaPorCpfeEmail(ServidorDTO objetoDTO) {
 		Optional<Pessoa> objeto = pessoaRepositorio.findByCpf(objetoDTO.getCpf());
-		if(objeto.isPresent() && objeto.get().getId() != objetoDTO.getId()) {
+		if (objeto.isPresent() && objeto.get().getId() != objetoDTO.getId()) {
 			throw new ViolacaoIntegridadeDadoException("CPF já cadastrado!");
 		}
-		
+
 		objeto = pessoaRepositorio.findByEmail(objetoDTO.getEmail());
-		if(objeto.isPresent() && objeto.get().getId() != objetoDTO.getId()) {
+		if (objeto.isPresent() && objeto.get().getId() != objetoDTO.getId()) {
 			throw new ViolacaoIntegridadeDadoException("Email já cadastrado!");
 		}
 	}
-
 }

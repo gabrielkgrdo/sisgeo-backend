@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
 
@@ -26,6 +28,7 @@ public abstract class Pessoa {
 	protected Integer id;
 	protected String nome;
 	
+	@CPF
 	@Column(unique = true)
 	protected String cpf;
 	

@@ -9,12 +9,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kleyber.SISGEO.dominio.Servidor;
 import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
 
+import jakarta.validation.constraints.NotNull;
+
 public class ServidorDTO {
 
 	protected Integer id;
+	@NotNull(message = "o Nome é obrigatório!")
 	protected String nome;
+	@NotNull(message = "o CPF é obrigatório!")
 	protected String cpf;
+	@NotNull(message = "o Email é obrigatório!")
 	protected String email;
+	@NotNull(message = "a Senha é obrigatório!")
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
 

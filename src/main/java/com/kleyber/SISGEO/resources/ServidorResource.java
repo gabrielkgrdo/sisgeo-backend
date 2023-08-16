@@ -18,6 +18,8 @@ import com.kleyber.SISGEO.dominio.Servidor;
 import com.kleyber.SISGEO.dominio.DTOs.ServidorDTO;
 import com.kleyber.SISGEO.services.ServidorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/servidores")
 public class ServidorResource {
@@ -39,7 +41,7 @@ public class ServidorResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ServidorDTO> create(@RequestBody ServidorDTO objetoDTO) {
+	public ResponseEntity<ServidorDTO> create(@Valid @RequestBody ServidorDTO objetoDTO) {
 		Servidor newObjeto = service.create(objetoDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObjeto.getId()).toUri();	
 		return ResponseEntity.created(uri).build();

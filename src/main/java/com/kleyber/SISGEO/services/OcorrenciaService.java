@@ -1,5 +1,6 @@
 package com.kleyber.SISGEO.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,13 @@ public class OcorrenciaService {
 	public Ocorrencias create(@Valid OcorrenciaDTO objDTO) {
 		return repositorio.save(newOcorrencia(objDTO));
 	}
+	
+	public Ocorrencias update(@Valid Integer id, OcorrenciaDTO objDTO) {
+		objDTO.setId(id);
+		Ocorrencias objetoAntigo = bucaPeloId(id);
+		objetoAntigo = newOcorrencia(objDTO);
+		return repositorio.save(objetoAntigo);
+	}
 
 	private Ocorrencias newOcorrencia(OcorrenciaDTO obj) {
 		Servidor servidor = servidorService.findById(obj.getServidor());
@@ -49,6 +57,10 @@ public class OcorrenciaService {
 		Ocorrencias ocorrencia = new Ocorrencias();
 		if (obj.getId() != null) {
 			ocorrencia.setId(obj.getId());
+		}
+		
+		if(obj.getStatus().equals(2)) {
+			ocorrencia.setDataFechamento(LocalDate.now());
 		}
 
 		ocorrencia.setServidor(servidor);
@@ -59,4 +71,6 @@ public class OcorrenciaService {
 		ocorrencia.setDescricaoOcorrencia(obj.getDescricaoOcorrencia());
 		return ocorrencia;
 	}
+
+	
 }

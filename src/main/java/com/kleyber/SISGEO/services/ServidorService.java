@@ -49,6 +49,15 @@ public class ServidorService {
 		return repositorio.save(objetoAntigo);
 	}
 
+	public void delete(Integer id) {
+		Servidor objeto = findById(id);
+		if (objeto.getOcorrencias().size() > 0) {
+			throw new ViolacaoIntegridadeDadoException("Esse servidor possui um chamado atribuído e não pode ser deletado!");
+		}
+		repositorio.deleteById(id);
+
+	}
+
 	private void validaPorCpfeEmail(ServidorDTO objetoDTO) {
 		Optional<Pessoa> objeto = pessoaRepositorio.findByCpf(objetoDTO.getCpf());
 		if (objeto.isPresent() && objeto.get().getId() != objetoDTO.getId()) {

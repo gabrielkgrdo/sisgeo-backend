@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kleyber.SISGEO.dominio.Ocorrencias;
 
+import jakarta.validation.constraints.NotNull;
+
 public class OcorrenciaDTO {
 
 	private Integer id;
@@ -12,11 +14,17 @@ public class OcorrenciaDTO {
 	private LocalDate dataAbertura = LocalDate.now();
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
+	@NotNull(message = "O campo prioridade é obrigatório!")
 	private Integer prioridade;
+	@NotNull(message = "O campo status é obrigatório!")
 	private Integer status;
+	@NotNull(message = "O campo titulo é obrigatório!")
 	private String titulo;
+	@NotNull(message = "O campo descricaoOcorrencia é obrigatório!")
 	private String descricaoOcorrencia;
+	@NotNull(message = "O campo servidor é obrigatório!")
 	private Integer servidor;
+	@NotNull(message = "O campo usuario é obrigatório!")
 	private Integer usuario;
 	private String nomeServidor;
 	private String nomeUsuario;

@@ -11,6 +11,7 @@ import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
 import com.kleyber.SISGEO.services.exceptions.ViolacaoIntegridadeDadoException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ManipuladorExceptionResouce {
@@ -47,5 +48,16 @@ public class ManipuladorExceptionResouce {
 		}
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros);
+	}
+	
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ErroPadrao> constraintViolationException(ConstraintViolationException ex,
+			HttpServletRequest request){
+		
+		ErroPadrao error = new ErroPadrao(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+				"Violação de integridade de dados", "Número do CPF inválido!", 
+				request.getRequestURI());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 }

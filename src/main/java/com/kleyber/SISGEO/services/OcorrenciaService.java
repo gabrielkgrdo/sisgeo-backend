@@ -1,5 +1,6 @@
 package com.kleyber.SISGEO.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class OcorrenciaService {
 	public Ocorrencias bucaPeloId(Integer id) {
 		Optional<Ocorrencias> obj = repositorio.findById(id);
 		return obj.orElseThrow(() -> new ObjetonaoEncontradoException("Objeto não encontrado! ID:" +id));
+	}
+
+	public List<Ocorrencias> buscarTodasOcorrencias() {
+		return repositorio.findAll();
 	}
 }

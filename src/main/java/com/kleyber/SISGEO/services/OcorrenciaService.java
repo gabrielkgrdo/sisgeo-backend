@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,6 @@ import com.kleyber.SISGEO.dominio.enumeradores.Prioridade;
 import com.kleyber.SISGEO.dominio.enumeradores.Status;
 import com.kleyber.SISGEO.repositorios.OcorrenciasRepositorio;
 import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
-
-import jakarta.validation.Valid;
 
 @Service
 public class OcorrenciaService {

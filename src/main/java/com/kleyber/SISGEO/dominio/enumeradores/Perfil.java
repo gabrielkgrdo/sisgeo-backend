@@ -2,7 +2,7 @@ package com.kleyber.SISGEO.dominio.enumeradores;
 
 public enum Perfil {
 
-	ADMIN(0, "PERFIL_ADMIN"), USUARIO(1, "PERFIL_USUARIO"), SERVIDOR(2, "PERFIL_ATENDENTE");
+	ADMIN(0, "PERFIL_ADMIN"), USUARIO(1, "PERFIL_USUARIO"), SERVIDOR(2, "PERFIL_SERVIDOR");
 	
 	private Integer codigo;
 	private String descricao;

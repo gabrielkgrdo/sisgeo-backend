@@ -102,8 +102,9 @@ public abstract class Pessoa {
 		return perfis.stream().map(x -> Perfil.enumeradores(x)).collect(Collectors.toSet());
 	}
 
-	public void addPerfil(Perfil perfil) {
+	public Integer addPerfil(Perfil perfil) {
 		this.perfis.add(perfil.getCodigo());
+		return perfil.getCodigo();
 	}
 
 	public LocalDate getDataCriacao() {

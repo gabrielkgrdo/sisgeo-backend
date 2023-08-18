@@ -1,8 +1,13 @@
 package com.kleyber.SISGEO.dominio;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kleyber.SISGEO.dominio.DTOs.UsuarioDTO;
@@ -12,8 +17,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Usuario extends Pessoa {
+public class Usuario extends Pessoa implements UserDetails{
 
+	private static final long serialVersionUID = 1L;
 	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
 	private List<Ocorrencias> ocorrencias = new ArrayList<>();
@@ -45,6 +51,42 @@ public class Usuario extends Pessoa {
 
 	public void setOcorrencias(List<Ocorrencias> ocorrencias) {
 		this.ocorrencias = ocorrencias;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if(this.perfis.add(addPerfil(Perfil.ADMIN))) return List.of(new SimpleGrantedAuthority("PERFIL_ADMIN"), new SimpleGrantedAuthority("PERFIL_USUARIO"));
+		else return List.of(new SimpleGrantedAuthority("PERFIL_USUARIO"));
+	}
+
+	@Override
+	public String getPassword() {
+		return email;
+	}
+
+	@Override
+	public String getUsername() {
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
 	}
 	
 	

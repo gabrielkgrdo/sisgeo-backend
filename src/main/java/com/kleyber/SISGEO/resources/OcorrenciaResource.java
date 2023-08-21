@@ -19,7 +19,7 @@ import com.kleyber.SISGEO.dominio.Ocorrencias;
 import com.kleyber.SISGEO.dominio.DTOs.OcorrenciaDTO;
 import com.kleyber.SISGEO.services.OcorrenciaService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/ocorrencias")

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kleyber.SISGEO.dominio.Pessoa;
@@ -14,7 +15,7 @@ import com.kleyber.SISGEO.repositorios.UsuarioRepositorio;
 import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
 import com.kleyber.SISGEO.services.exceptions.ViolacaoIntegridadeDadoException;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Service
 public class UsuarioService {
@@ -24,6 +25,9 @@ public class UsuarioService {
 
 	@Autowired
 	private PessoaRepositorio pessoaRepositorio;
+	
+	@Autowired
+	private BCryptPasswordEncoder codificador;
 
 	public Usuario findById(Integer id) {
 		Optional<Usuario> objeto = repositorio.findById(id);
@@ -36,6 +40,7 @@ public class UsuarioService {
 
 	public Usuario create(UsuarioDTO objetoDTO) {
 		objetoDTO.setId(null);
+		objetoDTO.setSenha(codificador.encode(objetoDTO.getSenha()));
 		validaPorCpfeEmail(objetoDTO);
 		Usuario newObj = new Usuario(objetoDTO);
 		return repositorio.save(newObj);

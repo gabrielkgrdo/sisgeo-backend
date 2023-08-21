@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
 import com.kleyber.SISGEO.services.exceptions.ViolacaoIntegridadeDadoException;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintViolationException;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ManipuladorExceptionResouce {

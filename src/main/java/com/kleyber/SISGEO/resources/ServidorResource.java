@@ -20,7 +20,7 @@ import com.kleyber.SISGEO.dominio.Servidor;
 import com.kleyber.SISGEO.dominio.DTOs.ServidorDTO;
 import com.kleyber.SISGEO.services.ServidorService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/servidores")

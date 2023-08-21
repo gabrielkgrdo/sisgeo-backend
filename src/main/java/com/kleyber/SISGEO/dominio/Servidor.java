@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kleyber.SISGEO.dominio.DTOs.ServidorDTO;
 import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Servidor extends Pessoa{

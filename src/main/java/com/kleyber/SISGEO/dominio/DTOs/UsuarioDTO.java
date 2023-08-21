@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kleyber.SISGEO.dominio.Usuario;
 import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
 
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;
 
 public class UsuarioDTO {
 

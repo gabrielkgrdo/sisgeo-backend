@@ -20,7 +20,7 @@ import com.kleyber.SISGEO.dominio.Usuario;
 import com.kleyber.SISGEO.dominio.DTOs.UsuarioDTO;
 import com.kleyber.SISGEO.services.UsuarioService;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/usuarios")

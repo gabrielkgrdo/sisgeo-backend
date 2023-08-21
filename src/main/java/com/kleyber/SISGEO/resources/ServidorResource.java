@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.kleyber.SISGEO.dominio.Servidor;
 import com.kleyber.SISGEO.dominio.DTOs.ServidorDTO;
 import com.kleyber.SISGEO.services.ServidorService;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/servidores")
@@ -42,6 +43,7 @@ public class ServidorResource {
 		return ResponseEntity.ok().body(listaDTO);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<ServidorDTO> create(@Valid @RequestBody ServidorDTO objetoDTO) {
 		Servidor newObjeto = service.create(objetoDTO);
@@ -49,12 +51,14 @@ public class ServidorResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ServidorDTO> update(@PathVariable Integer id, @Valid @RequestBody ServidorDTO objetoDto){
 		Servidor objeto = service.update(id, objetoDto);
 		return ResponseEntity.ok().body(new ServidorDTO(objeto));
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ServidorDTO> delete(@PathVariable Integer id) {
 		service.delete(id);

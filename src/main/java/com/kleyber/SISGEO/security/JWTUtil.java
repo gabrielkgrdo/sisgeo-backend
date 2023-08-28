@@ -1,5 +1,6 @@
 package com.kleyber.SISGEO.security;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +23,11 @@ public class JWTUtil {
 		
 		Date now = new Date();
 		
-		Date expirationDate = new Date(now.getTime() + 3600 * 1000);
-		
+		// Ajuste a data de expiração em conformidade
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(now);
+		calendar.add(Calendar.HOUR_OF_DAY, 3); // Adicione 3 horas para compensar o deslocamento
+		Date expirationDate = calendar.getTime();		
 		return Jwts.builder()
 				.setSubject(email)
 				.setExpiration(expirationDate)

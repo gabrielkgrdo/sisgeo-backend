@@ -19,9 +19,14 @@ public class JWTUtil {
 	private String secret;
 	
 	public String gerarToken(String email) {
+		
+		Date now = new Date();
+		
+		Date expirationDate = new Date(now.getTime() + expiration);
+		
 		return Jwts.builder()
 				.setSubject(email)
-				.setExpiration(new Date(System.currentTimeMillis() + expiration))
+				.setExpiration(expirationDate)
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();
 	}

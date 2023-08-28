@@ -21,14 +21,14 @@ public class JWTUtil {
 	public String gerarToken(String email) {
 		return Jwts.builder()
 				.setSubject(email)
-				.setExpiration(new Date(System.currentTimeMillis() + expiration))
+				.setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 *1000))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();
 	}
 
 	public boolean tokenValido(String token) {
 		Claims reivindicacoes = getReividicacoes(token);
-		if(reivindicacoes != null) {
+		if(reivindicacoes != null) { 
 			String username = reivindicacoes.getSubject();
 			Date expirationDate = reivindicacoes.getExpiration();
 			Date now = new Date(System.currentTimeMillis());

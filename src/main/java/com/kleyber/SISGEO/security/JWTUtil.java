@@ -12,8 +12,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JWTUtil {
 	
-	@Value("${jwt.expiration}")
-	private Long expiration;
+	//@Value("${jwt.expiration}")
+	//private Long expiration;
 	
 	@Value("${jwt.secret}")
 	private String secret;
@@ -22,7 +22,7 @@ public class JWTUtil {
 		
 		Date now = new Date();
 		
-		Date expirationDate = new Date(now.getTime() + expiration);
+		Date expirationDate = new Date(now.getTime() + 3600 * 1000);
 		
 		return Jwts.builder()
 				.setSubject(email)

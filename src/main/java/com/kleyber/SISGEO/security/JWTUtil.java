@@ -1,5 +1,6 @@
 package com.kleyber.SISGEO.security;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -12,22 +13,20 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JWTUtil {
 	
-	@Value("${jwt.expiration}")
-	private Long expiration;
+	@Value("${jwt.expirationInDays}")
+	private int expirationInDays;
 	
 	@Value("${jwt.secret}")
 	private String secret;
 	
-	public String gerarToken(UsuarioSecurity usuarioSecurity) {
+	public String gerarToken(String email) {
 		
-		
+		Calendar expirationDate = Calendar.getInstance();
+        expirationDate.add(Calendar.DAY_OF_MONTH, expirationInDays);
 		
 		return Jwts.builder()
-				.claim("id", usuarioSecurity.getId())
-                .claim("name", usuarioSecurity.getUsername())
-                .claim("roles", usuarioSecurity.getAuthorities())
-				.setSubject(usuarioSecurity.getUsername())
-				.setExpiration(new Date(System.currentTimeMillis() + expiration))
+				.setSubject(email)
+				.setExpiration(expirationDate.getTime())
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();
 	}
@@ -39,17 +38,19 @@ public class JWTUtil {
 			Date expirationDate = reivindicacoes.getExpiration();
 			Date now = new Date(System.currentTimeMillis());
 			
-			return username != null && expirationDate != null && now.before(expirationDate);
+			if(username != null && expirationDate != null && now.before(expirationDate)) {
+				return true;
 			}
-		return false;
 		}
+		return false;
+	}
 	
 
 	private Claims getReividicacoes(String token) {
 		try {
 			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
 			} catch (Exception e) { 
-			return null;
+			return null;  
 		}
 		
 	}

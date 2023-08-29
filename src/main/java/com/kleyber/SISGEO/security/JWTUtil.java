@@ -13,8 +13,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JWTUtil {
 	
-	@Value("${jwt.expirationInDays}")
-	private int expirationInDays;
+	//@Value("${jwt.expirationInDays}")
+	//private int expirationInDays;
 	
 	@Value("${jwt.secret}")
 	private String secret;
@@ -22,7 +22,7 @@ public class JWTUtil {
 	public String gerarToken(String email) {
 		
 		Calendar expirationDate = Calendar.getInstance();
-        expirationDate.add(Calendar.DAY_OF_MONTH, expirationInDays);
+        expirationDate.add(Calendar.HOUR_OF_DAY, 1);
 		
 		return Jwts.builder()
 				.setSubject(email)
@@ -38,8 +38,15 @@ public class JWTUtil {
 			Date expirationDate = reivindicacoes.getExpiration();
 			Date now = new Date(System.currentTimeMillis());
 			
-			if(username != null && expirationDate != null && now.before(expirationDate)) {
-				return true;
+			// Calcule a diferença em milissegundos entre a data de expiração e a data atual
+	        long diffMillis = expirationDate.getTime() - now.getTime();
+	        
+	        // Converta a diferença de milissegundos para horas
+	        long diffHours = diffMillis / (60 * 60 * 1000); // 1 hora = 60 minutos * 60 segundos * 1000 milissegundos
+
+	        // Verifique se a diferença é maior que zero, o que significa que o token ainda é válido
+	        if (username != null && expirationDate != null && diffHours > 0) {
+	            return true;
 			}
 		}
 		return false;

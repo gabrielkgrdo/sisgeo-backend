@@ -13,7 +13,6 @@ import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
 import com.kleyber.SISGEO.dominio.enumeradores.Prioridade;
 import com.kleyber.SISGEO.dominio.enumeradores.Status;
 import com.kleyber.SISGEO.repositorios.OcorrenciasRepositorio;
-import com.kleyber.SISGEO.repositorios.PessoaRepositorio;
 import com.kleyber.SISGEO.repositorios.ServidorRepositorio;
 import com.kleyber.SISGEO.repositorios.UsuarioRepositorio;
 

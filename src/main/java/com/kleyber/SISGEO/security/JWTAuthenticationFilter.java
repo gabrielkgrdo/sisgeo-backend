@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kleyber.SISGEO.dominio.DTOs.CredenciaisDTO;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+	
 
 	private AuthenticationManager authenticationManager;
 	private JWTUtil jwtUtil;
@@ -49,12 +50,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	
 			String username = ((UsuarioSecurity) authResult.getPrincipal()).getUsername();
 			String token = jwtUtil.gerarToken(username);
-			response.setHeader("Access-Control-Allow-Origin", "*");
-        	response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-        	response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, enctype, Location");
-        	response.setHeader("Authorization", "Bearer " + token);
-	}
-
+			response.setHeader("access-control-expose-headers", "Authorization");
+			response.setHeader("Authorization", "Bearer " + token);
+			}
+			
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException failed) throws IOException, ServletException {

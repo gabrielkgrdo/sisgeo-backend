@@ -49,6 +49,11 @@ public class ServidorService {
 	public Servidor update(Integer id, @Valid ServidorDTO objetoDto) {
 		objetoDto.setId(id);
 		Servidor objetoAntigo = findById(id);
+		
+		if(!objetoDto.getSenha().equals(objetoAntigo.getSenha())) {
+			objetoDto.setSenha(codificador.encode(objetoDto.getSenha()));
+		}
+		
 		validaPorCpfeEmail(objetoDto);
 		objetoAntigo = new Servidor(objetoDto);
 		return repositorio.save(objetoAntigo);

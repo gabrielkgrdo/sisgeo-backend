@@ -19,8 +19,11 @@ public class JWTUtil {
 	private String secret;
 
 	public String gerarToken(String email) {
-		return Jwts.builder().setSubject(email).setExpiration(new Date(System.currentTimeMillis() + expiration))
-				.signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
+		return Jwts.builder()
+				.setSubject(email)
+				.setExpiration(new Date(System.currentTimeMillis() + expiration))
+				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
+				.compact();
 	}
 
 	public boolean tokenValido(String token) {

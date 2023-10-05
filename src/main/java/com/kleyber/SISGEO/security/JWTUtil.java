@@ -1,8 +1,10 @@
 package com.kleyber.SISGEO.security;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -18,9 +20,10 @@ public class JWTUtil {
 	@Value("${jwt.secret}")
 	private String secret;
 
-	public String gerarToken(String email) {
+	public String gerarToken(String email, Collection<? extends GrantedAuthority> autoridades) {
 		return Jwts.builder()
 				.setSubject(email)
+				.claim("roles", autoridades)
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();

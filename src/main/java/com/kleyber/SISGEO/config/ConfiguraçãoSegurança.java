@@ -49,6 +49,7 @@ public class ConfiguraçãoSegurança extends WebSecurityConfigurerAdapter{
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.authorizeRequests()
 			.antMatchers(PUBLIC_MATCHERS).permitAll()
+			.antMatchers("/usuarios").permitAll()
 			.anyRequest().authenticated();
 		
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

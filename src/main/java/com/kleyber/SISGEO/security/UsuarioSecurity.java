@@ -14,13 +14,15 @@ public class UsuarioSecurity implements UserDetails{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	private String nome;
 	private String email;
 	private String senha;
 	private Collection<? extends GrantedAuthority> autoridade;
 	
-	public UsuarioSecurity(Integer id, String email, String senha, Set<Perfil> perfis) {
+	public UsuarioSecurity(Integer id, String email, String nome, String senha, Set<Perfil> perfis) {
 		super();
 		this.id = id;
+		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.autoridade = perfis.stream().map(perfil -> new SimpleGrantedAuthority(perfil.getDescricao())).collect(Collectors.toSet());
@@ -29,6 +31,11 @@ public class UsuarioSecurity implements UserDetails{
 	public Integer getId() {
 		return id;
 	}
+	
+	public String getNome() {
+	    return nome;
+	}
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

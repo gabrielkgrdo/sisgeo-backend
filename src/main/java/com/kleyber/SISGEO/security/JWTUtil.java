@@ -20,9 +20,10 @@ public class JWTUtil {
 	@Value("${jwt.secret}")
 	private String secret;
 
-	public String gerarToken(String email, Collection<? extends GrantedAuthority> autoridades) {
+	public String gerarToken(String email, String nome, Collection<? extends GrantedAuthority> autoridades) {
 		return Jwts.builder()
 				.setSubject(email)
+				.claim("nome", nome)
 				.claim("roles", autoridades)
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())

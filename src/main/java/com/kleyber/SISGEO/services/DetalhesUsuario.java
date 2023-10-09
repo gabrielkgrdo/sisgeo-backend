@@ -22,7 +22,7 @@ public class DetalhesUsuario implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Optional<Pessoa> usuario = repositorio.findByEmail(email);
 		if(usuario.isPresent()) {
-			return new UsuarioSecurity(usuario.get().getId(), usuario.get().getEmail(), usuario.get().getSenha(), usuario.get().getPerfis());
+			return new UsuarioSecurity(usuario.get().getId(),  usuario.get().getNome(), usuario.get().getEmail(), usuario.get().getSenha(), usuario.get().getPerfis());
 		}
 		throw new UsernameNotFoundException(email);
 	}

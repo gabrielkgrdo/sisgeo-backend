@@ -1,52 +1,13 @@
 package com.kleyber.SISGEO.dominio.DTOs;
 
-import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.kleyber.SISGEO.dominio.Ocorrencias;
-
-import javax.validation.constraints.NotNull;
-
 public class OcorrenciaDTO {
+    private Integer id;
+    private String tipoOcorrenciaNome;
 
-	private Integer id;
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataAbertura = LocalDate.now();
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataFechamento;
-	@NotNull(message = "O campo prioridade é obrigatório!")
-	private Integer prioridade;
-	@NotNull(message = "O campo status é obrigatório!")
-	private Integer status;
-	@NotNull(message = "O campo titulo é obrigatório!")
-	private String titulo;
-	@NotNull(message = "O campo descricaoOcorrencia é obrigatório!")
-	private String descricaoOcorrencia;
-	@NotNull(message = "O campo servidor é obrigatório!")
-	private Integer servidor;
-	@NotNull(message = "O campo usuario é obrigatório!")
-	private Integer usuario;
-	private String nomeServidor;
-	private String nomeUsuario;
-
-	public OcorrenciaDTO() {
-		super();
-	}
-
-	public OcorrenciaDTO(Ocorrencias obj) {
-		super();
-		this.id = obj.getId();
-		this.dataAbertura = obj.getDataAbertura();
-		this.dataFechamento = obj.getDataFechamento();
-		this.prioridade = obj.getPrioridade().getCodigo();
-		this.status = obj.getStatus().getCodigo();
-		this.titulo = obj.getTitulo();
-		this.descricaoOcorrencia = obj.getDescricaoOcorrencia();
-		this.servidor = obj.getServidor().getId();
-		this.usuario = obj.getUsuario().getId();
-		this.nomeServidor = obj.getServidor().getNome();
-		this.nomeUsuario = obj.getUsuario().getNome();
-	}
+    public OcorrenciaDTO(Integer id, String tipoOcorrenciaNome) {
+        this.id = id;
+        this.tipoOcorrenciaNome = tipoOcorrenciaNome;
+    }
 
 	public Integer getId() {
 		return id;
@@ -56,84 +17,13 @@ public class OcorrenciaDTO {
 		this.id = id;
 	}
 
-	public LocalDate getDataAbertura() {
-		return dataAbertura;
+	public String getTipoOcorrenciaNome() {
+		return tipoOcorrenciaNome;
 	}
 
-	public void setDataAbertura(LocalDate dataAbertura) {
-		this.dataAbertura = dataAbertura;
+	public void setTipoOcorrenciaNome(String tipoOcorrenciaNome) {
+		this.tipoOcorrenciaNome = tipoOcorrenciaNome;
 	}
 
-	public LocalDate getDataFechamento() {
-		return dataFechamento;
-	}
-
-	public void setDataFechamento(LocalDate dataFechamento) {
-		this.dataFechamento = dataFechamento;
-	}
-
-	public Integer getPrioridade() {
-		return prioridade;
-	}
-
-	public void setPrioridade(Integer prioridade) {
-		this.prioridade = prioridade;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getDescricaoOcorrencia() {
-		return descricaoOcorrencia;
-	}
-
-	public void setDescricaoOcorrencia(String descricaoOcorrencia) {
-		this.descricaoOcorrencia = descricaoOcorrencia;
-	}
-
-	public Integer getServidor() {
-		return servidor;
-	}
-
-	public void setServidor(Integer servidor) {
-		this.servidor = servidor;
-	}
-
-	public Integer getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Integer usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getNomeServidor() {
-		return nomeServidor;
-	}
-
-	public void setNomeServidor(String nomeServidor) {
-		this.nomeServidor = nomeServidor;
-	}
-
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
-	}
-
+    
 }

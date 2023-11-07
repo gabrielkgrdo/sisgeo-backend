@@ -18,7 +18,7 @@ import com.kleyber.SISGEO.dominio.enumeradores.Status;
 import com.kleyber.SISGEO.repositorios.OcorrenciasRepositorio;
 import com.kleyber.SISGEO.services.exceptions.ObjetonaoEncontradoException;
 
-@Service
+
 public class OcorrenciaService {
 
 	@Autowired

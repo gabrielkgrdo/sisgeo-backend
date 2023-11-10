@@ -4,12 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kleyber.SISGEO.dominio.AcidenteTransito;
+import com.kleyber.SISGEO.dominio.Ameaca;
+import com.kleyber.SISGEO.dominio.DesaparecimentoPessoa;
+import com.kleyber.SISGEO.dominio.Estelionato;
+import com.kleyber.SISGEO.dominio.Furto;
+import com.kleyber.SISGEO.dominio.LesaoCorporal;
 import com.kleyber.SISGEO.dominio.MariaDaPenha;
 import com.kleyber.SISGEO.dominio.MausTratos;
 import com.kleyber.SISGEO.dominio.Ocorrencia;
+import com.kleyber.SISGEO.dominio.OfensasRaciais;
+import com.kleyber.SISGEO.dominio.Pertubacao;
+import com.kleyber.SISGEO.dominio.Roubo;
 import com.kleyber.SISGEO.repositorios.AcidenteTransitoRepository;
+import com.kleyber.SISGEO.repositorios.AmeacaRepository;
+import com.kleyber.SISGEO.repositorios.DesaparecimentoRepository;
+import com.kleyber.SISGEO.repositorios.EstelionatoRepository;
+import com.kleyber.SISGEO.repositorios.FurtoRepository;
+import com.kleyber.SISGEO.repositorios.LesaoCorporalRepository;
 import com.kleyber.SISGEO.repositorios.MariaDaPenhaReposiotrio;
 import com.kleyber.SISGEO.repositorios.MausTratosRepository;
+import com.kleyber.SISGEO.repositorios.OfensasRaciaisRepository;
+import com.kleyber.SISGEO.repositorios.PertubacaoRepository;
+import com.kleyber.SISGEO.repositorios.RouboRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +42,30 @@ public class OcorrenciasService {
     
     @Autowired
     private AcidenteTransitoRepository acidenteTransitoRepository;
+    
+    @Autowired
+    private FurtoRepository furtoRepository;
+    
+    @Autowired
+    private RouboRepository rouboRepository;
+    
+    @Autowired
+    private AmeacaRepository ameacaRepository;
+    
+    @Autowired
+    private DesaparecimentoRepository desaparecimentoRepository;
+    
+    @Autowired
+    private EstelionatoRepository estelionatoRepository;
+    
+    @Autowired
+    private LesaoCorporalRepository lesaoCorporalRepository;
+    
+    @Autowired
+    private OfensasRaciaisRepository ofensasRaciaisRepository;
+    
+    @Autowired
+    private PertubacaoRepository pertubacaoRepository;
 
     public Ocorrencia findById(Integer id) {
         // Verifique em qual repositório buscar com base no ID
@@ -44,6 +84,46 @@ public class OcorrenciasService {
             return acidenteTransito.get();
         }
         
+        Optional<Furto> furto = furtoRepository.findById(id);
+        if (furto.isPresent()) {
+            return furto.get();
+        }
+        
+        Optional<Roubo> roubo = rouboRepository.findById(id);
+        if (roubo.isPresent()) {
+            return roubo.get();
+        }
+        
+        Optional<Ameaca> ameaca = ameacaRepository.findById(id);
+        if (ameaca.isPresent()) {
+            return ameaca.get();
+        }
+        
+        Optional<DesaparecimentoPessoa> desaparecimento = desaparecimentoRepository.findById(id);
+        if (desaparecimento.isPresent()) {
+            return desaparecimento.get();
+        }
+        
+        Optional<Estelionato> estelionato = estelionatoRepository.findById(id);
+        if (estelionato.isPresent()) {
+            return estelionato.get();
+        }
+        
+        Optional<LesaoCorporal> lesaoCorporal = lesaoCorporalRepository.findById(id);
+        if (lesaoCorporal.isPresent()) {
+            return lesaoCorporal.get();
+        }
+        
+        Optional<OfensasRaciais> ofensas = ofensasRaciaisRepository.findById(id);
+        if (ofensas.isPresent()) {
+            return ofensas.get();
+        }
+        
+        Optional<Pertubacao> pertubacao = pertubacaoRepository.findById(id);
+        if (pertubacao.isPresent()) {
+            return pertubacao.get();
+        }
+        
         // Lida com outros tipos de ocorrência aqui, se necessário
 
         return null; // Retorna null se a ocorrência não for encontrada
@@ -57,8 +137,24 @@ public class OcorrenciasService {
             return mausTratosRepository.save((MausTratos) ocorrencia);
         }else if (ocorrencia instanceof AcidenteTransito) {
             return acidenteTransitoRepository.save((AcidenteTransito) ocorrencia);
-        }
-        // Lida com outros tipos de ocorrência aqui, se necessário
+        }else if (ocorrencia instanceof Roubo) {
+            return rouboRepository.save((Roubo) ocorrencia);
+        }else if (ocorrencia instanceof Furto) {
+            return furtoRepository.save((Furto) ocorrencia);
+        }else if (ocorrencia instanceof Ameaca) {
+            return ameacaRepository.save((Ameaca) ocorrencia);
+        }else if (ocorrencia instanceof DesaparecimentoPessoa) {
+            return desaparecimentoRepository.save((DesaparecimentoPessoa) ocorrencia);
+        }else if (ocorrencia instanceof Estelionato) {
+            return estelionatoRepository.save((Estelionato) ocorrencia);
+        }else if (ocorrencia instanceof LesaoCorporal) {
+            return lesaoCorporalRepository.save((LesaoCorporal) ocorrencia);
+        }else if (ocorrencia instanceof OfensasRaciais) {
+            return ofensasRaciaisRepository.save((OfensasRaciais) ocorrencia);
+        }else if (ocorrencia instanceof Pertubacao) {
+            return pertubacaoRepository.save((Pertubacao) ocorrencia);
+        }                         
+        
         return null;
     }
 
@@ -68,6 +164,14 @@ public class OcorrenciasService {
         todasOcorrencias.addAll(mariaDaPenhaRepository.findAll());
         todasOcorrencias.addAll(mausTratosRepository.findAll());
         todasOcorrencias.addAll(acidenteTransitoRepository.findAll());
+        todasOcorrencias.addAll(furtoRepository.findAll());
+        todasOcorrencias.addAll(rouboRepository.findAll());
+        todasOcorrencias.addAll(ameacaRepository.findAll());
+        todasOcorrencias.addAll(desaparecimentoRepository.findAll());
+        todasOcorrencias.addAll(estelionatoRepository.findAll());
+        todasOcorrencias.addAll(lesaoCorporalRepository.findAll());
+        todasOcorrencias.addAll(ofensasRaciaisRepository.findAll());
+        todasOcorrencias.addAll(pertubacaoRepository.findAll());
         // Adicione outras listas, se houver
         return todasOcorrencias;
     }

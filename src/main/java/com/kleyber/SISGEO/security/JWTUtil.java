@@ -20,9 +20,10 @@ public class JWTUtil {
 	@Value("${jwt.secret}")
 	private String secret;
 
-	public String gerarToken(String email, String nome, Collection<? extends GrantedAuthority> autoridades) {
+	public String gerarToken(Integer id, String email, String nome, Collection<? extends GrantedAuthority> autoridades) {
 		return Jwts.builder()
 				.setSubject(email)
+				.claim("id_usuario", id)
 				.claim("nome", nome)
 				.claim("roles", autoridades)
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))

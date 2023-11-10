@@ -19,6 +19,7 @@ import com.kleyber.SISGEO.dominio.enumeradores.Prioridade;
 import com.kleyber.SISGEO.dominio.enumeradores.Status;
 
 @Entity
+
 public class Ocorrencia {
 
 	 	@Id

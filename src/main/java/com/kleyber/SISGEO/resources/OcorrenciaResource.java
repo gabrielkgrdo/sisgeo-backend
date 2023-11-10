@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kleyber.SISGEO.dominio.AcidenteTransito;
 import com.kleyber.SISGEO.dominio.MariaDaPenha;
 import com.kleyber.SISGEO.dominio.MausTratos;
 import com.kleyber.SISGEO.dominio.Ocorrencia;
 import com.kleyber.SISGEO.dominio.Servidor;
+import com.kleyber.SISGEO.repositorios.AcidenteTransitoRepository;
 import com.kleyber.SISGEO.repositorios.MariaDaPenhaReposiotrio;
 import com.kleyber.SISGEO.repositorios.MausTratosRepository;
 import com.kleyber.SISGEO.services.OcorrenciasService;
@@ -33,6 +35,9 @@ public class OcorrenciaResource {
 
 	@Autowired
 	private MausTratosRepository mausTratosRepository;
+	
+	@Autowired
+	private AcidenteTransitoRepository acidenteTransitoRepository;
 
 	@GetMapping
 	public ResponseEntity<List<Ocorrencia>> listAllOcorrencias() {
@@ -77,6 +82,8 @@ public class OcorrenciaResource {
                 mariaDaPenhaRepository.save((MariaDaPenha) existingOcorrencia);
             } else if (existingOcorrencia instanceof MausTratos) {
                 mausTratosRepository.save((MausTratos) existingOcorrencia);
+            }else if (existingOcorrencia instanceof AcidenteTransito) {
+                acidenteTransitoRepository.save((AcidenteTransito) existingOcorrencia);
             }
             // Adicione salvamento para outros tipos de ocorrência, se necessário.
 

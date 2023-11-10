@@ -8,11 +8,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class MausTratos extends Ocorrencia {
-	
+public class AcidenteTransito extends Ocorrencia{
+
 	@ManyToMany 
     @JoinTable(
-    	    name = "MAUS_TRATOS_MEIOS_EMPREGADOS",
+    	    name = "ACIDENTE_TRANSITO_EMPREGADOS",
     	    joinColumns = @JoinColumn(name = "ocorrencia_id"),
     	    inverseJoinColumns = @JoinColumn(name = "meio_empregado_id")
     	)
@@ -27,10 +27,10 @@ public class MausTratos extends Ocorrencia {
         this.meioEmpregado = meioEmpregado;
     }
 
-	public MausTratos() {
+	public AcidenteTransito() {
 
 		TipoOcorrencia tipoOcorrencia = new TipoOcorrencia();
-		tipoOcorrencia.setId(2L);
+		tipoOcorrencia.setId(3L);
 
 		setTipoOcorrencia(tipoOcorrencia);
 

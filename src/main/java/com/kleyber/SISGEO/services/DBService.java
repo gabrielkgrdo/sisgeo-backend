@@ -1,6 +1,5 @@
 package com.kleyber.SISGEO.services;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -74,8 +73,20 @@ public class DBService {
 		
 		TipoOcorrencia mariaDaPenha = new TipoOcorrencia(null, "Maria da Penha");
 	    TipoOcorrencia mausTratosAnimais = new TipoOcorrencia(null, "Maus Tratos aos Animais");
+	    TipoOcorrencia acidenteTransito = new TipoOcorrencia(null, "Acidente de Trânsito");
+	    TipoOcorrencia furto = new TipoOcorrencia(null, "Furto");
+	    TipoOcorrencia roubo = new TipoOcorrencia(null, "Roubo");
+	    TipoOcorrencia ameacaOcorrencia = new TipoOcorrencia(null, "Ameaça");
+	    TipoOcorrencia desaparecimentoPessoa = new TipoOcorrencia(null, "Desaparecimento de pessoa");
+	    TipoOcorrencia estelionato = new TipoOcorrencia(null, "Estelionato, fraudes ou apropiações");
+	    TipoOcorrencia lesaoCorporal = new TipoOcorrencia(null, "Lesão Corporal");
+	    TipoOcorrencia ofensasRaciais = new TipoOcorrencia(null, "Ofensas Raciais");
+	    TipoOcorrencia pertubacao = new TipoOcorrencia(null, "Pertubação");
 	    
-	    tipoOcorrenciaRepository.saveAll(Arrays.asList(mariaDaPenha,mausTratosAnimais));
+	    tipoOcorrenciaRepository.saveAll(Arrays.asList(mariaDaPenha,mausTratosAnimais,acidenteTransito,furto,roubo,ameacaOcorrencia,desaparecimentoPessoa,estelionato,
+	    		lesaoCorporal,ofensasRaciais,pertubacao));
+	    
+	    
 	    
 	    TipoLocalCriminal agenciaBancaria = new TipoLocalCriminal(null, "AGÊNCIA BANCÁRIA");
 	    TipoLocalCriminal comercio = new TipoLocalCriminal(null, "COMÉRCIO DIVERSOS");

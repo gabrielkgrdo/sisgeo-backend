@@ -3,9 +3,11 @@ package com.kleyber.SISGEO.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kleyber.SISGEO.dominio.AcidenteTransito;
 import com.kleyber.SISGEO.dominio.MariaDaPenha;
 import com.kleyber.SISGEO.dominio.MausTratos;
 import com.kleyber.SISGEO.dominio.Ocorrencia;
+import com.kleyber.SISGEO.repositorios.AcidenteTransitoRepository;
 import com.kleyber.SISGEO.repositorios.MariaDaPenhaReposiotrio;
 import com.kleyber.SISGEO.repositorios.MausTratosRepository;
 
@@ -21,6 +23,9 @@ public class OcorrenciasService {
 
     @Autowired
     private MausTratosRepository mausTratosRepository;
+    
+    @Autowired
+    private AcidenteTransitoRepository acidenteTransitoRepository;
 
     public Ocorrencia findById(Integer id) {
         // Verifique em qual repositório buscar com base no ID
@@ -34,6 +39,11 @@ public class OcorrenciasService {
             return mausTratos.get();
         }
         
+        Optional<AcidenteTransito> acidenteTransito = acidenteTransitoRepository.findById(id);
+        if (acidenteTransito.isPresent()) {
+            return acidenteTransito.get();
+        }
+        
         // Lida com outros tipos de ocorrência aqui, se necessário
 
         return null; // Retorna null se a ocorrência não for encontrada
@@ -45,6 +55,8 @@ public class OcorrenciasService {
             return mariaDaPenhaRepository.save((MariaDaPenha) ocorrencia);
         } else if (ocorrencia instanceof MausTratos) {
             return mausTratosRepository.save((MausTratos) ocorrencia);
+        }else if (ocorrencia instanceof AcidenteTransito) {
+            return acidenteTransitoRepository.save((AcidenteTransito) ocorrencia);
         }
         // Lida com outros tipos de ocorrência aqui, se necessário
         return null;
@@ -55,24 +67,23 @@ public class OcorrenciasService {
         List<Ocorrencia> todasOcorrencias = new ArrayList<>();
         todasOcorrencias.addAll(mariaDaPenhaRepository.findAll());
         todasOcorrencias.addAll(mausTratosRepository.findAll());
+        todasOcorrencias.addAll(acidenteTransitoRepository.findAll());
         // Adicione outras listas, se houver
         return todasOcorrencias;
     }
 
-
-
-
-
-
-
     public void deleteOcorrencia(Integer id) {
         MariaDaPenha mariaDaPenha = mariaDaPenhaRepository.findById(id).orElse(null);
         MausTratos mausTratos = mausTratosRepository.findById(id).orElse(null);
+        AcidenteTransito acidenteTransito = acidenteTransitoRepository.findById(id).orElse(null);
         
         if (mariaDaPenha != null) {
             mariaDaPenhaRepository.deleteById(id);
         } else if (mausTratos != null) {
             mausTratosRepository.deleteById(id);
+        }
+        else if (acidenteTransito != null) {
+        	acidenteTransitoRepository.deleteById(id);
         }
         // Lida com outros tipos de ocorrência aqui, se necessário
     }

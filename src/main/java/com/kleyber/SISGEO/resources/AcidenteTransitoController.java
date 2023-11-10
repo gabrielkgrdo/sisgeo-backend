@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kleyber.SISGEO.dominio.AcidenteTransito;
 import com.kleyber.SISGEO.dominio.Cidade;
-import com.kleyber.SISGEO.dominio.MausTratos;
 import com.kleyber.SISGEO.dominio.MeioEmpregado;
 import com.kleyber.SISGEO.dominio.Ocorrencia;
 import com.kleyber.SISGEO.dominio.Servidor;
@@ -22,8 +22,8 @@ import com.kleyber.SISGEO.services.MeioEmpregadoService;
 import com.kleyber.SISGEO.services.OcorrenciasService;
 
 @RestController
-@RequestMapping("/maus-tratos")
-public class MausTratosController {
+@RequestMapping("/acidente-transito")
+public class AcidenteTransitoController {
 
 	@Autowired
     private OcorrenciasService ocorrenciasService;
@@ -32,46 +32,46 @@ public class MausTratosController {
     private MeioEmpregadoService meioEmpregadoService;
 
     @PostMapping
-    public ResponseEntity<Ocorrencia> createMausTratosOcorrencia(@RequestBody MausTratos mausTratos) {
-    	mausTratos.setUf("DF");
+    public ResponseEntity<Ocorrencia> createAcidenteTransitoOcorrencia(@RequestBody AcidenteTransito acidenteTransito) {
+    	acidenteTransito.setUf("DF");
         
         
      
-        Servidor servidor = mausTratos.getServidor();
+        Servidor servidor = acidenteTransito.getServidor();
         if (servidor != null && servidor.getId() == null) {
             
-        	mausTratos.setServidor(null);
+        	acidenteTransito.setServidor(null);
         }
         
-        Prioridade prioridade = mausTratos.getPrioridade();
+        Prioridade prioridade = acidenteTransito.getPrioridade();
         if (prioridade != null) {
             
-        	mausTratos.setPrioridade(prioridade);
+        	acidenteTransito.setPrioridade(prioridade);
         }
         
-        Status status = mausTratos.getStatus();
+        Status status = acidenteTransito.getStatus();
         if (status != null) {
             
-        	mausTratos.setStatus(status);
+        	acidenteTransito.setStatus(status);
         }
         
-        Cidade cidade = mausTratos.getCidade();
+        Cidade cidade = acidenteTransito.getCidade();
         if (cidade == null) {
             
             throw new IllegalArgumentException("O campo 'cidade' não pode ser nulo.");
         }
 
         SetorArea setor = new SetorArea();
-        setor.setId(mausTratos.getSetorArea().getId()); 
-        mausTratos.setSetorArea(setor);
+        setor.setId(acidenteTransito.getSetorArea().getId()); 
+        acidenteTransito.setSetorArea(setor);
 
         
-        List<MeioEmpregado> meioEmpregadoList = meioEmpregadoService.buscarMeioEmpregadoPorIds(mausTratos.getMeioEmpregadoIds());
+        List<MeioEmpregado> meioEmpregadoList = meioEmpregadoService.buscarMeioEmpregadoPorIds(acidenteTransito.getMeioEmpregadoIds());
 
         
-        mausTratos.setMeioEmpregado(meioEmpregadoList);
+        acidenteTransito.setMeioEmpregado(meioEmpregadoList);
 
-        Ocorrencia savedOcorrencia = ocorrenciasService.createOcorrencia(mausTratos);
+        Ocorrencia savedOcorrencia = ocorrenciasService.createOcorrencia(acidenteTransito);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedOcorrencia);
     }
     }

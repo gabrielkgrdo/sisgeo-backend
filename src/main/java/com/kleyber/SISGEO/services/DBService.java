@@ -51,21 +51,21 @@ public class DBService {
 	
 
 	public void instanciaDB() {
-		Servidor servidor1 = new Servidor(null, "Kleyber Gabriel", "394.040.010-66", "kleyber@mail.com", codificador.encode("123"));
+		Servidor servidor1 = new Servidor(null, "Kleyber Gabriel", "394.040.010-66", "kleyber@mail.com", codificador.encode("123"), true);
 		servidor1.addPerfil(Perfil.ADMIN);
 		
-		Servidor servidor2 = new Servidor(null, "Richard Stallman", "903.347.070-56", "stallman@mail.com", codificador.encode("123"));
-		Servidor servidor3 = new Servidor(null, "Claude Elwood Shannon", "271.068.470-54", "shannon@mail.com", codificador.encode("123"));
-		Servidor servidor4 = new Servidor(null, "Tim Berners-Lee", "162.720.120-39", "lee@mail.com", codificador.encode("123"));
-		Servidor servidor5 = new Servidor(null, "Linus Torvalds", "778.556.170-27", "linus@mail.com", codificador.encode("123"));
+		Servidor servidor2 = new Servidor(null, "Richard Stallman", "903.347.070-56", "stallman@mail.com", codificador.encode("123"), true);
+		Servidor servidor3 = new Servidor(null, "Claude Elwood Shannon", "271.068.470-54", "shannon@mail.com", codificador.encode("123"), true);
+		Servidor servidor4 = new Servidor(null, "Tim Berners-Lee", "162.720.120-39", "lee@mail.com", codificador.encode("123"), true);
+		Servidor servidor5 = new Servidor(null, "Linus Torvalds", "778.556.170-27", "linus@mail.com", codificador.encode("123"), true);
 	
 		
 		
-		Usuario usuario1 = new Usuario(null, "Biel Sales", "678.193.560-73", "biel@mail.com", codificador.encode("123"));
-		Usuario usuario2 = new Usuario(null, "Albert Einstein", "111.661.890-74", "einstein@mail.com", codificador.encode("123"));
-		Usuario usuario3 = new Usuario(null, "Marie Curie", "322.429.140-06", "curie@mail.com", codificador.encode("123"));
-		Usuario usuario4 = new Usuario(null, "Charles Darwin", "792.043.830-62", "darwin@mail.com", codificador.encode("123"));
-		Usuario usuario5 = new Usuario(null, "Stephen Hawking", "177.409.680-30", "hawking@mail.com", codificador.encode("123"));
+		Usuario usuario1 = new Usuario(null, "Biel Sales", "678.193.560-73", "biel@mail.com", codificador.encode("123"), true);
+		Usuario usuario2 = new Usuario(null, "Albert Einstein", "111.661.890-74", "einstein@mail.com", codificador.encode("123"), true);
+		Usuario usuario3 = new Usuario(null, "Marie Curie", "322.429.140-06", "curie@mail.com", codificador.encode("123"), true);
+		Usuario usuario4 = new Usuario(null, "Charles Darwin", "792.043.830-62", "darwin@mail.com", codificador.encode("123"), true);
+		Usuario usuario5 = new Usuario(null, "Stephen Hawking", "177.409.680-30", "hawking@mail.com", codificador.encode("123"), true);
 
 		
 		

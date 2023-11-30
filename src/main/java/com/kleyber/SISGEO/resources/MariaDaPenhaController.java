@@ -16,6 +16,7 @@ import com.kleyber.SISGEO.dominio.MeioEmpregado;
 import com.kleyber.SISGEO.dominio.Ocorrencia;
 import com.kleyber.SISGEO.dominio.Servidor;
 import com.kleyber.SISGEO.dominio.SetorArea;
+import com.kleyber.SISGEO.dominio.Usuario;
 import com.kleyber.SISGEO.dominio.enumeradores.Prioridade;
 import com.kleyber.SISGEO.dominio.enumeradores.Status;
 import com.kleyber.SISGEO.services.MeioEmpregadoService;
@@ -40,6 +41,12 @@ public class MariaDaPenhaController {
         if (servidor != null && servidor.getId() == null) {
             // Se o ID do servidor não foi especificado, defina-o como nulo
             mariaDaPenha.setServidor(null);
+        }
+        
+        Usuario usuario = mariaDaPenha.getUsuario();
+        if (usuario != null && usuario.getId() == null) {
+            // Se o ID do usuário não foi especificado, defina-o como nulo
+            mariaDaPenha.setUsuario(null);
         }
         
         Prioridade prioridade = mariaDaPenha.getPrioridade();

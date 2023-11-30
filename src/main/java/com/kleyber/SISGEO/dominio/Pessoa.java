@@ -6,11 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.hibernate.validator.constraints.br.CPF;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
-
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -20,8 +15,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kleyber.SISGEO.dominio.enumeradores.Perfil;
+
 @Entity
 public abstract class Pessoa {
+	
+	 @Column(name = "ativo")
+	 protected boolean ativo = true;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,9 +51,10 @@ public abstract class Pessoa {
 		addPerfil(Perfil.USUARIO);
 	}
 
-	public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
+	public Pessoa(Integer id, String nome, String cpf, String email, String senha, boolean ativo) {
 		super();
 		this.id = id;
+		this.ativo = ativo;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -58,6 +62,14 @@ public abstract class Pessoa {
 		addPerfil(Perfil.USUARIO);
 	}
 
+	public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+	
 	public Integer getId() {
 		return id;
 	}

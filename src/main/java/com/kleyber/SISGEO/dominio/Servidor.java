@@ -23,8 +23,8 @@ public class Servidor extends Pessoa{
 		addPerfil(Perfil.USUARIO);
 	}
 
-	public Servidor(Integer id, String nome, String cpf, String email, String senha) {
-		super(id, nome, cpf, email, senha);
+	public Servidor(Integer id, String nome, String cpf, String email, String senha, boolean ativo) {
+		super(id, nome, cpf, email, senha, ativo);
 		addPerfil(Perfil.USUARIO);
 	}
 	

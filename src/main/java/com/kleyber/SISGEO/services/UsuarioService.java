@@ -59,7 +59,8 @@ public class UsuarioService {
 		if (objeto.getOcorrencias().size() > 0) {
 			throw new ViolacaoIntegridadeDadoException("Esse Usuario possui um chamado atribuído e não pode ser deletado!");
 		}
-		repositorio.deleteById(id);
+		objeto.setAtivo(false);
+		repositorio.save(objeto);
 
 	}
 

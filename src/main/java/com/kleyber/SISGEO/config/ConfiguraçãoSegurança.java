@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,7 +50,9 @@ public class ConfiguraçãoSegurança extends WebSecurityConfigurerAdapter{
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.authorizeRequests()
 			.antMatchers(PUBLIC_MATCHERS).permitAll()
-			.antMatchers("/usuarios").permitAll()
+			.antMatchers("/usuarios","/cidades","/tipo-local-criminal","/meio-empregado","/setores").permitAll()
+			.antMatchers("/setores/cidade/{cidadeId}").permitAll()
+			.antMatchers(HttpMethod.POST, "/maria-da-penha").permitAll()
 			.anyRequest().authenticated();
 		
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

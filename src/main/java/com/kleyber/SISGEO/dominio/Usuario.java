@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Usuario extends Pessoa {
 
+	
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
@@ -24,8 +25,8 @@ public class Usuario extends Pessoa {
 		addPerfil(Perfil.USUARIO);
 	}
 
-	public Usuario(Integer id, String nome, String cpf, String email, String senha) {
-		super(id, nome, cpf, email, senha);
+	public Usuario(Integer id, String nome, String cpf, String email, String senha, boolean ativo) {
+		super(id, nome, cpf, email, senha, ativo);
 		addPerfil(Perfil.USUARIO);
 	}
 	
